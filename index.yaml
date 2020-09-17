@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  realworld:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2020-09-17T17:40:42.067917+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 419fe3b3dd09933b52cb073e1983d585396f85c91795cb6be4ca5e7b1ee04a43
+    name: realworld
+    type: application
+    urls:
+    - https://github.com/yess171/DevOpsAssestement.git/realworld-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-09-17T17:40:42.065854+02:00"
