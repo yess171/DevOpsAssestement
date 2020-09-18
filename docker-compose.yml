@@ -1,0 +1,46 @@
+version: '3'
+services:
+  django:
+    build:
+      context: django
+    container_name: django
+    image: django
+    ports:
+      - "8010:8010"
+    depends_on:
+      - postgres
+    volumes:
+      - web-django:/usr/src/app
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8010"]
+    networks:
+      - net
+  postgres:
+    build:
+      context: postgres   
+    container_name: postgres
+    image: postgres 
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    networks:
+      - net
+  nodejs:
+    build:
+      context: nodejs
+    container_name: nodejs
+    image: nodejs 
+    ports:
+      - "8020:8020"
+    command: ["npm", "start"]
+    networks:
+      - net
+networks:
+  net:
+
+volumes:
+  web-django:
+  pgdata:

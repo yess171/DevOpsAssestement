@@ -1,0 +1,24 @@
+FROM node:12
+
+COPY package.json app.js ./
+RUN npm install
+RUN npm audit fix --force
+RUN npm init -y
+RUN npm install express 
+
+CMD ["node", "app.js"]
+
+FROM python:3.4
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+COPY . .
+WORKDIR /usr/src/app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8010
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8010"]
+
